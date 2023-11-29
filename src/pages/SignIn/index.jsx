@@ -1,13 +1,18 @@
 import { FiMail, FiLock } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '../../hooks/auth';
+
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 
 import { Container, Form, Background } from "./styles";
 
 export function SignIn() {
-  
+
+  const data = useAuth()
+  console.log("Meu Contexto => ", data);
+
   return (
     <Container>
       <Form>
@@ -36,7 +41,7 @@ export function SignIn() {
 
       </Form>
 
-      <Background/>
+      <Background />
     </Container>
   )
 }

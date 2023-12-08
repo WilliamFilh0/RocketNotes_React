@@ -17,8 +17,9 @@ export function Home() {
 
       <Header />
 
+      {/* Tirei o isActive do todos */}
       <Menu>
-        <li><ButtonText title="Todos" isActive /></li>
+        <li><ButtonText title="Todos" /></li>
         <li><ButtonText title="React" /></li>
         <li><ButtonText title="Nodejs" /></li>
       </Menu>
@@ -32,8 +33,8 @@ export function Home() {
           <Note data={{
             title: 'React',
             tags: [
-              {id: '1',name: 'react'},
-              {id: '2',name: 'rocketseat'}
+              { id: '1', name: 'react' },
+              { id: '2', name: 'rocketseat' }
             ]
           }}
           />

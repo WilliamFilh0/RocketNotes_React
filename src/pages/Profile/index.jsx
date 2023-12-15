@@ -10,7 +10,6 @@ import { Button } from '../../components/Button';
 import { Container, Form, Avatar } from "./styles";
 
 
-
 export function Profile() {
   const { user, updateProfile } = useAuth();
 
@@ -74,14 +73,14 @@ export function Profile() {
 
         <Input
           placeholder="Senha atual"
-          type="text"
+          type="password"
           icon={FiLock}
           onChange={e => setPasswordOld(e.target.value)}
         />
 
         <Input
           placeholder="Nova Senha"
-          type="text"
+          type="password"
           icon={FiLock}
           onChange={e => setPasswordNew(e.target.value)}
         />

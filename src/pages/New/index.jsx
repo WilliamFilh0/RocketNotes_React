@@ -48,7 +48,7 @@ export function New() {
 
   async function handleNewNote() {
     if (!title) {
-      alert("Digite o título da nota.")
+      return alert("Digite o título da nota.")
     }
 
     if (newLink) {

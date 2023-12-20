@@ -24,9 +24,6 @@ export function Home() {
       return setTagsSelected([]);
     }
 
-
-
-
     const alreadySelected = tagsSelected.includes(tagName)
 
     if (alreadySelected) {
@@ -40,8 +37,6 @@ export function Home() {
   function handleDetails(id) {
     navigate(`/details/${id}`)
   }
-
-
 
   useEffect(() => {
     async function fetchTags() {

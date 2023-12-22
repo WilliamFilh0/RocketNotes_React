@@ -1,41 +1,41 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FiPlus } from 'react-icons/fi'
-import { api } from '../../services/api';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FiPlus } from "react-icons/fi";
+import { api } from "../../services/api";
 
-import { Container, Brand, Menu, Search, Content, NewNote } from './styles';
+import { Container, Brand, Menu, Search, Content, NewNote } from "./styles";
 
-import { Note } from '../../components/Note';
-import { Input } from '../../components/Input';
-import { Header } from '../../components/Header';
-import { Section } from '../../components/Section';
-import { ButtonText } from '../../components/ButtonText';
+import { Note } from "../../components/Note";
+import { Input } from "../../components/Input";
+import { Header } from "../../components/Header";
+import { Section } from "../../components/Section";
+import { ButtonText } from "../../components/ButtonText";
 
 export function Home() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleTagSelected(tagName) {
     if (tagName === "all") {
       return setTagsSelected([]);
     }
 
-    const alreadySelected = tagsSelected.includes(tagName)
+    const alreadySelected = tagsSelected.includes(tagName);
 
     if (alreadySelected) {
-      const filteredTags = tagsSelected.filter(tag => tag !== tagName)
-      setTagsSelected(filteredTags)
+      const filteredTags = tagsSelected.filter((tag) => tag !== tagName);
+      setTagsSelected(filteredTags);
     } else {
-      setTagsSelected(prevState => [...prevState, tagName]);
+      setTagsSelected((prevState) => [...prevState, tagName]);
     }
   }
 
   function handleDetails(id) {
-    navigate(`/details/${id}`)
+    navigate(`/details/${id}`);
   }
 
   useEffect(() => {
@@ -44,17 +44,18 @@ export function Home() {
       setTags(response.data);
     }
 
-    fetchTags()
-
+    fetchTags();
   }, []);
 
   useEffect(() => {
     async function fetchNotes() {
-      const response = await api.get(`/notes?title= ${search}&tags=${tagsSelected}`);
-      setNotes(response.data)
+      const response = await api.get(
+        `/notes?title= ${search}&tags=${tagsSelected}`
+      );
+      setNotes(response.data);
     }
 
-    fetchNotes()
+    fetchNotes();
   }, [tagsSelected, search]);
 
   return (
@@ -62,9 +63,7 @@ export function Home() {
       <Brand>
         <h1>RocketNotes</h1>
       </Brand>
-
       <Header />
-
 
       <Menu>
         <li>
@@ -75,8 +74,8 @@ export function Home() {
           />
         </li>
 
-        {
-          tags && tags.map(tag => (
+        {tags &&
+          tags.map((tag) => (
             <li key={String(tag.id)}>
               <ButtonText
                 title={tag.name}
@@ -84,9 +83,7 @@ export function Home() {
                 isActive={tagsSelected.includes(tag.name)}
               />
             </li>
-          ))
-        }
-
+          ))}
       </Menu>
 
       <Search>
@@ -98,17 +95,14 @@ export function Home() {
 
       <Content>
         <Section title="Minhas notas">
-          {
-            notes.map(note => (
-              <Note
-                key={String(note.id)}
-                data={note}
-                onClick={() => handleDetails(note.id)}
-              />
-            ))
-          }
+          {notes.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
         </Section>
-
       </Content>
 
       <NewNote to="/new">

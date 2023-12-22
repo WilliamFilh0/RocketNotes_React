@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import backgroundImg from '../../assets/background.png'
+import backgroundImg from "../../assets/background.png";
 
 export const Container = styled.div`
   height: 100vh;
-  
+
   display: flex;
   align-items: stretch;
 `;
-
 
 export const Form = styled.form`
   padding: 0 136px;
@@ -19,26 +18,25 @@ export const Form = styled.form`
 
   text-align: center;
 
-  >h1 {
+  > h1 {
     font-size: 48px;
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
 
-  >h2 {
+  > h2 {
     font-size: 24px;
     margin: 48px 0;
   }
 
-  >p {
+  > p {
     font-size: 14px;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
   }
 
-  >a {
+  > a {
     margin-top: 124px;
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
-  
 `;
 
 export const Background = styled.div`

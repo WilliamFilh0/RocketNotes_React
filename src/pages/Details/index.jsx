@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react'
-import { Container, Links, Content } from './styles'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { Container, Links, Content } from "./styles";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { api } from '../../services/api'
+import { api } from "../../services/api";
 
-import { Tag } from '../../components/Tag'
-import { Header } from '../../components/Header'
-import { Button } from '../../components/Button'
-import { Section } from '../../components/Section'
-import { ButtonText } from '../../components/ButtonText'
-
+import { Tag } from "../../components/Tag";
+import { Header } from "../../components/Header";
+import { Button } from "../../components/Button";
+import { Section } from "../../components/Section";
+import { ButtonText } from "../../components/ButtonText";
 
 export function Details() {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
 
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function handleBack() {
     navigate("/");
@@ -32,78 +31,52 @@ export function Details() {
 
   useEffect(() => {
     async function fetchNote() {
-      const response = await api.get(`/notes/${params.id}`)
-      setData(response.data)
+      const response = await api.get(`/notes/${params.id}`);
+      setData(response.data);
     }
 
-    fetchNote()
-  }, [])
+    fetchNote();
+  }, []);
 
   return (
     <Container>
       <Header />
 
-
-      {
-        data &&
+      {data && (
         <main>
           <Content>
-            <ButtonText
-              title="Excluir nota"
-              onClick={handleRemove}
-            />
+            <ButtonText title="Excluir nota" onClick={handleRemove} />
 
-            <h1>
-              {data.title}
-            </h1>
+            <h1>{data.title}</h1>
 
-            <p>
-              {data.description}
-            </p>
+            <p>{data.description}</p>
 
-            {
-              data.links &&
-              < Section title="Links Uteis" >
+            {data.links && (
+              <Section title="Links Uteis">
                 <Links>
-                  {
-                    data.links.map(link => (
-                      <li key={String(link.id)}>
-                        <a href={link.url}
-                          target='_blank'>
-                          {link.url}
-                        </a>
-                      </li>
-                    ))
-                  }
-
+                  {data.links.map((link) => (
+                    <li key={String(link.id)}>
+                      <a href={link.url} target="_blank">
+                        {link.url}
+                      </a>
+                    </li>
+                  ))}
                 </Links>
               </Section>
-            }
+            )}
 
-            {
-              data.tags &&
-              <Section title="Marcadores" >
-
-                {
-                  data.tags.map(tag => (
-                    <Tag
-                      key={String(tag.id)}
-                      title={tag.name}
-                    />
-                  ))
-                }
+            {data.tags && (
+              <Section title="Marcadores">
+                {data.tags.map((tag) => (
+                  <Tag key={String(tag.id)} title={tag.name} />
+                ))}
               </Section>
-            }
+            )}
 
-            <Button
-              title="Voltar"
-              onClick={handleBack}
-            />
-
+            <Button title="Voltar" onClick={handleBack} />
           </Content>
         </main>
-      }
-    </Container >
-  )
+      )}
+    </Container>
+  );
 }
-
